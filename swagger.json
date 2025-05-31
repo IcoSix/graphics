@@ -1,0 +1,311 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "IcoSix API",
+    "description": "A comprehensive RESTful API for accessing thousands of professionally designed icons, SVG vectors, and animated GIFs.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "IcoSix API Support",
+      "url": "https://api.icosix.com/support-center.php",
+      "email": "support@icosix.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.icosix.com/v1",
+      "description": "Production API Server"
+    },
+    {
+      "url": "https://api.staging.icosix.com/v1",
+      "description": "Staging API Server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Authentication",
+      "description": "API key management and authentication"
+    },
+    {
+      "name": "Graphics",
+      "description": "Endpoints for accessing and searching graphics"
+    },
+    {
+      "name": "Collections",
+      "description": "Endpoints for accessing collections of graphics"
+    }
+  ],
+  "paths": {
+    "/register": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Register for an API key",
+        "description": "Register and obtain an API key for accessing the IcoSix API",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["name", "email"],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "John Doe"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "example": "john@example.com"
+                  },
+                  "company": {
+                    "type": "string",
+                    "example": "Acme Inc."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful registration",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "api_key": {
+                          "type": "string",
+                          "example": "icos_1a2b3c4d5e6f7g8h9i0j"
+                        },
+                        "expires_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2025-05-01T00:00:00Z"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/graphics": {
+      "get": {
+        "tags": ["Graphics"],
+        "summary": "Get all graphics",
+        "description": "Retrieve a paginated list of all available graphics",
+        "parameters": [
+          {
+            "name": "X-API-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Your API key"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "Page number for pagination"
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 10,
+              "maximum": 100
+            },
+            "description": "Number of items per page"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["svg", "icon", "gif"]
+            },
+            "description": "Filter by graphic type"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["newest", "oldest", "popular"]
+            },
+            "description": "Sort order for results"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "graphics": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Graphic"
+                          }
+                        },
+                        "total": {
+                          "type": "integer",
+                          "example": 100
+                        },
+                        "page": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "per_page": {
+                          "type": "integer",
+                          "example": 10
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Graphic": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "12345"
+          },
+          "title": {
+            "type": "string",
+            "example": "File SVG Vector"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["svg", "icon", "gif"],
+            "example": "svg"
+          },
+          "url": {
+            "type": "string",
+            "example": "https://api.icosix.com/assets/svg/12345.svg"
+          },
+          "thumbnail_url": {
+            "type": "string",
+            "example": "https://api.icosix.com/assets/thumbnails/12345.png"
+          },
+          "category": {
+            "type": "string",
+            "example": "File Graphics"
+          },
+          "collection": {
+            "type": "string",
+            "example": "File Graphics"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": ["file", "document", "paper"]
+          },
+          "downloads": {
+            "type": "integer",
+            "example": 71
+          },
+          "views": {
+            "type": "integer",
+            "example": 122
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2024-03-10T10:30:00Z"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "error"
+          },
+          "message": {
+            "type": "string",
+            "example": "Invalid API key"
+          },
+          "code": {
+            "type": "integer",
+            "example": 401
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key"
+      }
+    }
+  },
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ]
+} 
