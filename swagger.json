@@ -20,7 +20,7 @@
       "description": "Production API Server"
     },
     {
-      "url": "https://api.staging.icosix.com/v1",
+      "url": "https://api.icosix.com/v1",
       "description": "Staging API Server"
     }
   ],
@@ -241,11 +241,11 @@
           },
           "url": {
             "type": "string",
-            "example": "https://api.icosix.com/assets/svg/12345.svg"
+            "example": "https://api.icosix.com/v1/graphics.php?assets/svg/12345.svg"
           },
           "thumbnail_url": {
             "type": "string",
-            "example": "https://api.icosix.com/assets/thumbnails/12345.png"
+            "example": "https://api.icosix.com/v1/graphics.php?assets/thumbnails/12345.png"
           },
           "category": {
             "type": "string",
