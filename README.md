@@ -1,6 +1,6 @@
 # IcoSix API
 
-![IcoSix API Logo]([assets/images/icosix-logo.png](http://127.0.0.1/ico/api/assets/images/logo.svg))
+![IcoSix API Logo](assets/images/icosix-logo.png)
 
 ## Overview
 
