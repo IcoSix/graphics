@@ -22,7 +22,7 @@ We use GitHub to host code, to track issues and feature requests, as well as acc
 
 ### Issues
 
-We use GitHub issues to track public bugs. Report a bug by [opening a new issue](https://github.com/IcoSix/graphics); it's that easy!
+We use GitHub issues to track public bugs. Report a bug by [opening a new issue](https://github.com/icosix/graphics); it's that easy!
 
 ## Coding Style Guidelines
 
