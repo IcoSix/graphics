@@ -79,7 +79,7 @@ console.log('Graphics:', data.graphics);
 
 For support inquiries, please contact:
 - Email: support@icosix.com
-- Support Center: [https://api.icosix.com/support-center.php](https://api.icosix.com/support-center.php)
+- Support Center: [https://api.icosix.com/support-center.php](https://www.icosix.com/api/support-center.php)
 
 ## License
 
