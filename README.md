@@ -38,7 +38,7 @@ The IcoSix API documentation includes:
 
 ```javascript
 // Example: Generate API Key
-const response = await fetch('https://api.icosix.com/v1/register', {
+const response = await fetch('https://api.icosix.com/v1/', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json'
@@ -58,7 +58,7 @@ console.log('Your API Key:', data.api_key);
 ```javascript
 // Example: Fetch Graphics
 const apiKey = 'YOUR_API_KEY';
-const response = await fetch('https://api.icosix.com/v1/graphics?type=svg', {
+const response = await fetch('https://api.icosix.com/v1/graphics.php?type=svg', {
   headers: {
     'X-API-Key': apiKey
   }
