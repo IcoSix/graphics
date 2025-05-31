@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/icosix/api.git"
+    "url": "git+https://github.com/IcoSix/"
   },
   "keywords": [
     "api",
@@ -25,9 +25,9 @@
   "author": "IcoSix Team",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/icosix/api/issues"
+    "url": "https://github.com/IcoSix/graphics"
   },
-  "homepage": "https://github.com/icosix/api#readme",
+  "homepage": "https://github.com/IcoSix/graphics#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
